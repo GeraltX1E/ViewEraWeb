@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://plc-studio-icch.leafyfrog36.chatgpt.site/sitemap.xml

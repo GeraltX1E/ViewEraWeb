@@ -1,0 +1,8 @@
+node_modules/
+artifacts/
+.tools/
+.env
+.env.*
+!.env.example
+*.tar.gz
+.DS_Store
