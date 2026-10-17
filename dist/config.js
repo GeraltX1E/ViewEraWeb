@@ -5,6 +5,6 @@ window.SITE_CONFIG = Object.freeze({
   platform: "ICCH",
   platformFullName: "Industrial Cloud Control Hub",
   desktop: "PLC Studio",
-  origin: "https://plc-studio-icch.leafyfrog36.chatgpt.site",
+  origin: "https://viewera.site",
   previewImage: "",
 });

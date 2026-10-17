@@ -30,7 +30,7 @@ ViewEra 是品牌，ICCH 是工业云控中枢。产品为现场工业电脑上�
 
 ## 部署与迁移
 
-当前站点：https://plc-studio-icch.leafyfrog36.chatgpt.site 。保持既有 Sites project_id、域名和访问范围。Sites 的托管源仓库与 GitHub 分开同步；修改后按 Sites Skill 打包及发布。
+目标正式域名：https://viewera.site 。GitHub Pages 配置和 DNS 操作见 [部署指南](docs/github-pages.md)。工作流先校验再发布 `dist`；首次启用受仓库可见性与账号套餐限制。原 Sites 身份保留，不因本次配置而删除原站点。
 
 `docs/history/` 保留拆分前的设计与验证记录，其中的旧目录、数量和测试结论属于当时快照。当前命令与范围以本 README、AGENTS.md 和代码为准。
 
