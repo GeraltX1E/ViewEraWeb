@@ -51,3 +51,16 @@ Products 保留原有三款产品，新增 PLC Detector 展示区与 `/products/
 本次包含 Detector 真实截图与详情页、架构图中的 Detector 节点、四产品导航子菜单，以及用户指定的两处文案删除。此前被撤销的大型产品卡片和架构重设计不包含在发布版本中。
 
 Windows 安装包公开下载单独确认；在确认之前，release metadata 保持 publicationApproved=false、productionUrl=null，线上明确显示等待确认，不使用本地预览地址。
+
+
+## 安装包公开发布 · 2026-10-19
+
+用户已明确确认“同时公开安装包并启用下载”。PLC-Detector 源码仓库保持私有；二进制安装包通过公开 ViewEraWeb 的独立 Release 管理，不进入 dist 或源码目录。
+
+Release：https://github.com/GeraltX1E/ViewEraWeb/releases/tag/plc-detector-v0.2.0
+
+下载：https://github.com/GeraltX1E/ViewEraWeb/releases/download/plc-detector-v0.2.0/PLCDetector-0.2.0-Cpp-Setup-x64.exe
+
+发布前已核对本地包与审阅记录一致，GitHub 资产的大小和 SHA-256 一致；公开后完成匿名完整下载，32331838 bytes，SHA-256 fa950dde743c962d0505e2921b1b1058ae8c3f1450f334a80aaec065e22a1483。安装器文件清单未发现开发配置或运行数据目录。本次不修改软件代码、不重新打包，安装与实机验收边界保持前述记录。
+
+官网 publicationApproved=true，productionUrl 为上述固定版本链接；中英文下载区同步改为已发布状态。Linux 保持 Coming Soon。此前 Phase 1 的禁用状态记录为历史快照。

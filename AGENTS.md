@@ -22,7 +22,7 @@
 
 - `node sync-shells.cjs` 同步公共外壳；`node check.cjs` 执行全部检查；`node preview.cjs` 本地预览。
 - 实际浏览器检查双语、路由、桌面/手机、键盘和演示；单元检查不能替代视觉检查。
-- 网站已获用户授权通过 ViewEraWeb main 分支发布；PLC Detector 安装包公开发布仍需明确确认。安装包只置于忽略目录 `artifacts/downloads/`，本地预览单独映射下载；正式链接未确认前保持禁用。
+- 网站已获用户授权通过 ViewEraWeb main 分支发布；PLC Detector 0.2.0 安装包也已获用户明确确认公开。后续版本发布仍按用户授权执行。安装包只置于忽略目录 `artifacts/downloads/`，本地预览单独映射下载；正式链接未确认前保持禁用。
 - 站点身份在 `.openai/hosting.json`，默认保持域名、project_id 和访问范围。使用 Sites 发布时按安装的 Sites Skill 执行。
 - 提交、推送、合并和发布依用户授权；核对远端 SHA，未验证不写通过。
 - 本仓库不含 C++ 桌面应用或局域网更新操作页，不引入其构建依赖。

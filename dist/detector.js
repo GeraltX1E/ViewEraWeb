@@ -101,8 +101,8 @@
     ],
     checksum: ["SHA-256 checksum", "SHA-256 校验值"],
     releaseNote: [
-      "Windows package prepared locally. Public distribution will use a versioned GitHub Release after approval.",
-      "Windows 安装包已在本地准备完成；确认后将通过对应版本的 GitHub Release 管理公开下载。",
+      "Windows 0.2.0 is available. Linux is coming soon.",
+      "Windows 0.2.0 已发布，Linux 版本即将推出。",
     ],
   };
   let locale = "en";

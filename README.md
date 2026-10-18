@@ -38,6 +38,6 @@ PLCcontroller 不再保留官网副本。它的 `src/application/softwareUpdateA
 
 ## PLC Detector 本地审阅
 
-详情路由 `/products/plc-detector` 使用实际软件截图，能力范围以 Detector 独立代码为准。官网已于 2026-10-19 获用户授权发布；Windows 安装包公开 Release 独立确认。
+详情路由 `/products/plc-detector` 使用实际软件截图，能力范围以 Detector 独立代码为准。官网已于 2026-10-19 获用户授权发布；Windows 0.2.0 安装包随后也已获用户确认公开。
 
-安装包存于忽略目录 `artifacts/downloads/`；`.tools/detector-download.json` 指定其中的本地文件。`node preview.cjs` 启动时校验包大小与 SHA-256，只在 127.0.0.1 提供下载。安装包不进入 `dist/`。缺少本地配置时，Windows 下载禁用。正式链接与发布许可保持关闭，Linux 仅 Coming Soon。详见 [审阅记录](docs/plc-detector-preview.md)。
+安装包存于忽略目录 `artifacts/downloads/`；`.tools/detector-download.json` 指定其中的本地文件。`node preview.cjs` 启动时校验包大小与 SHA-256，只在 127.0.0.1 提供下载。安装包不进入 `dist/`。缺少本地配置时，Windows 下载使用已确认的正式 Release 链接。正式链接指向 [PLC Detector 0.2.0 Release](https://github.com/GeraltX1E/ViewEraWeb/releases/tag/plc-detector-v0.2.0)，版本、大小与哈希在 detector-release.js 中维护，Linux 仅 Coming Soon。详见 [审阅记录](docs/plc-detector-preview.md)。
