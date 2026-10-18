@@ -14,19 +14,19 @@ node preview.cjs
 ## 文件
 
 - `dist/` 是可直接部署的静态源码，不能作为临时构建目录删除。
-- `content.js` / `app.js` 管理双语内容、七个路由及共享交互；`config.js` 配置品牌、邮箱与 origin。
+- `content.js` / `app.js` 管理双语内容、八个路由及共享交互；`config.js` 配置品牌、邮箱与 origin。
 - `home-*.js` / `home.js` / `home.css` 实现首页及复用的云端、移动端概念界面。
 - `studio.js` / `studio.css` 实现七模块 PLC Studio 概念工作空间。
 - `check.cjs`、`home-check.cjs`、`studio-check.cjs` 检查路由、语言、模拟数据与请求边界。
-- `sync-shells.cjs` 同步六个子路由直接入口；修改 `dist/index.html` 后执行。
+- `sync-shells.cjs` 同步七个子路由直接入口；修改 `dist/index.html` 后执行。
 - `.openai/hosting.json` 保留现有 Sites 身份，静态输出目录为 `dist`。
 - `AGENTS.md` 与 `.agents/skills/` 提供本仓库独立适用的开发规则；Apple Skill 保留上游原文与版权。
 
 ## 内容与边界
 
-ViewEra 是品牌，ICCH 是工业云控中枢。产品为现场工业电脑上的 PLC Studio，以及远程访问现场的 ICCH Hub Desktop / Mobile。功能、界面和设备集成可按客户需求与产线设计定制。演示使用本地模拟数据，不连接或控制工业设备；官网里的假设模块不代表已交付桌面能力。
+ViewEra 是品牌，ICCH 是工业云控中枢。产品包括现场工业电脑上的 PLC Studio、远程访问现场的 ICCH Hub Desktop / Mobile，以及独立的 PLC Detector 发现与通信工具。功能、界面和设备集成可按客户需求与产线设计定制。演示使用本地模拟数据，不连接或控制工业设备；官网里的假设模块不代表已交付桌面能力。
 
-路由：`/`、`/platform`（Hub）、`/products`、`/technology`、`/vision`、`/about`、`/contact`。
+路由：`/`、`/platform`（Hub）、`/products`、`/technology`、`/vision`、`/about`、`/contact`、`/products/plc-detector`。
 
 ## 部署与迁移
 
@@ -34,4 +34,10 @@ ViewEra 是品牌，ICCH 是工业云控中枢。产品为现场工业电脑上�
 
 `docs/history/` 保留拆分前的设计与验证记录，其中的旧目录、数量和测试结论属于当时快照。当前命令与范围以本 README、AGENTS.md 和代码为准。
 
-PLCcontroller 仍保留迁移快照。它的 `src/application/softwareUpdateAgent/web/` 是桌面局域网更新模块的操作页，不属于本官网，因此未迁入本仓库。
+PLCcontroller 不再保留官网副本。它的 `src/application/softwareUpdateAgent/web/` 是桌面局域网更新模块的操作页，不属于本官网，因此未迁入本仓库。
+
+## PLC Detector 本地审阅
+
+详情路由 `/products/plc-detector` 使用实际软件截图，能力范围以 Detector 独立代码为准。官网已于 2026-10-19 获用户授权发布；Windows 安装包公开 Release 独立确认。
+
+安装包存于忽略目录 `artifacts/downloads/`；`.tools/detector-download.json` 指定其中的本地文件。`node preview.cjs` 启动时校验包大小与 SHA-256，只在 127.0.0.1 提供下载。安装包不进入 `dist/`。缺少本地配置时，Windows 下载禁用。正式链接与发布许可保持关闭，Linux 仅 Coming Soon。详见 [审阅记录](docs/plc-detector-preview.md)。

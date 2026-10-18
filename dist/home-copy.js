@@ -81,6 +81,7 @@ window.ICCH_HOME_COPY = {
     "Web and mobile express intent. ICCH carries context. Factory computers running PLC Studio validate requests locally. PLC systems execute field logic and safety interlocks. Results travel back along the same path.",
     "Web 与移动端表达操作意图，ICCH 传递上下文。工厂电脑上的 PLC Studio 在现场校验请求，PLC 系统负责设备逻辑与安全联锁，执行结果沿原链路回传。",
   ],
+  detectorRole: ["Discovery & verification", "发现与通信验证"],
   flowLabels: [
     ["Web + Mobile", "Web + 移动端"],
     ["ICCH Cloud Hub", "ICCH 云端中枢"],

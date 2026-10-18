@@ -2430,3 +2430,36 @@
     margin-bottom: 60px;
   }
 }
+
+/* PLC Detector discovery tool between the on-site HMI and PLC. */
+.home-detector {
+  width: 134px;
+  max-width: 100%;
+  min-height: 48px;
+  padding: 10px 9px;
+  border: 1px solid #c4d3b8;
+  border-radius: 9px;
+  background: linear-gradient(145deg, #edf3e8, #f8faf6);
+  color: #718864;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  text-decoration: none;
+}
+.home-detector svg { width: 18px; height: 18px; flex: 0 0 auto; }
+.home-detector span { text-align: left; }
+.home-detector b { display: block; font-size: 10px; font-weight: 500; line-height: 1.4; }
+.home-detector small { display: block; font-size: 7px; line-height: 1.5; margin-top: 3px; color: #859777; }
+.home-detector:hover { border-color: #98b184; background: #edf3e6; }
+.home-detector:focus-visible { outline: 2px solid #78946b; outline-offset: 4px; }
+@media (max-width: 800px) {
+  .home-detector { width: 100px; padding: 8px 5px; gap: 5px; }
+  .home-detector svg { width: 13px; height: 13px; }
+  .home-detector b { font-size: 8px; }
+  .home-detector small { font-size: 6px; }
+}
+@media (prefers-contrast: more) {
+  .home-detector { color: #405832; border-color: #78946b; }
+  .home-detector small { color: #405832; }
+}

@@ -5,7 +5,7 @@ description: Validate and deliver ViewEraWeb changes with static checks, browser
 
 # 官网交付
 
-先核对 Git diff 与用户修改。源文件在 `dist/`，无额外编译。执行 `node check.cjs`；公共 HTML 改动执行 `node sync-shells.cjs`。界面改动需真实浏览器检查双语、七个路由、桌面/窄屏、焦点和模拟行为。
+先核对 Git diff 与用户修改。源文件在 `dist/`，无额外编译。执行 `node check.cjs`；公共 HTML 改动执行 `node sync-shells.cjs`。界面改动需真实浏览器检查双语、八个路由、桌面/窄屏、焦点和模拟行为。
 
 确认离线数据不可用、联锁/断线阻止请求、暂停/后台/离屏/reduced-motion 停止自动演示。可手动推进，不允许任何真实控制或持久化命令。
 

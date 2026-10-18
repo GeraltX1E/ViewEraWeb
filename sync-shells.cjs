@@ -12,6 +12,7 @@ for (const [route, label] of Object.entries({
   vision: "Vision",
   about: "About Us",
   contact: "Contact",
+  "products/plc-detector": "PLC Detector",
 })) {
   const title = `${label} — ICCH · ViewEra`;
   const html = base
@@ -25,4 +26,4 @@ for (const [route, label] of Object.entries({
   fs.mkdirSync(`dist/${route}`, { recursive: true });
   fs.writeFileSync(`dist/${route}/index.html`, html);
 }
-console.log("Six direct-entry shells synchronized.");
+console.log("Seven direct-entry shells synchronized.");

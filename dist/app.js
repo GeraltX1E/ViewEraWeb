@@ -7,6 +7,7 @@ const routes = [
   "/vision",
   "/about",
   "/contact",
+  "/products/plc-detector",
 ];
 const C = window.SITE_COPY,
   config = window.SITE_CONFIG;
@@ -73,10 +74,12 @@ function pageHero(eyebrow, title, intro) {
 }
 function page(route) {
   if (route === "/") return home();
+  if (route === "/products/plc-detector")
+    return window.PLCDetector.render(lang);
   if (route === "/platform")
     return `${pageHero("VIEWERA / ICCH", "platformTitle", "platformIntro")}<section class="platform-body wrap">${window.ICCHHome.component("network", lang)}<p class="architecture-note">${t("archNote")}</p><div class="section-intro reveal"><h2>${t("responsibilities")}</h2></div><div class="principles">${C.principles.map((x, i) => `<article class="reveal"><span class="number">0${i + 1}</span><h3>${pair(x[0])}</h3><p>${pair(x[1])}</p></article>`).join("")}</div></section>${cta()}`;
   if (route === "/products")
-    return `${pageHero("VIEWERA / PRODUCTS", "productsTitle", "productsIntro")}<p class="customization-note">${t("customization")}</p><section class="studio-section"><div class="wrap"><div class="section-intro reveal"><div><p class="eyebrow">${t("studioK")}</p><h2>${t("studioTitle")}</h2></div><p class="bodycopy">${t("studioBody")}</p></div>${showcase()}<div class="studio-traits">${C.studioTraits.map((x) => `<span>${pair(x)}</span>`).join("")}</div></div></section><div class="icch-home icch-support support-products"><section class="wrap"><div class="section-intro reveal"><h2>ICCH Hub Desktop</h2><p class="bodycopy">${t("desktopBody")}</p></div>${window.ICCHHome.component("desktop", lang)}<div class="support-mobile-row"><div class="section-intro reveal"><h2>ICCH Hub Mobile</h2><p class="bodycopy">${t("mobileBody")}</p></div>${window.ICCHHome.component("mobile", lang)}</div>${window.ICCHHome.playback(lang)}<p class="architecture-note">${t("remotePreview")}</p><p class="architecture-note">${t("productRelation")}</p></section></div>${cta()}`;
+    return `${pageHero("VIEWERA / PRODUCTS", "productsTitle", "productsIntro")}<p class="customization-note">${t("customization")}</p><section class="studio-section" id="plc-studio"><div class="wrap"><div class="section-intro reveal"><div><p class="eyebrow">${t("studioK")}</p><h2>${t("studioTitle")}</h2></div><p class="bodycopy">${t("studioBody")}</p></div>${showcase()}<div class="studio-traits">${C.studioTraits.map((x) => `<span>${pair(x)}</span>`).join("")}</div></div></section><div class="icch-home icch-support support-products"><section class="wrap"><div class="section-intro reveal"><h2 id="hub-desktop">ICCH Hub Desktop</h2><p class="bodycopy">${t("desktopBody")}</p></div>${window.ICCHHome.component("desktop", lang)}<div class="support-mobile-row"><div class="section-intro reveal"><h2 id="hub-mobile">ICCH Hub Mobile</h2><p class="bodycopy">${t("mobileBody")}</p></div>${window.ICCHHome.component("mobile", lang)}</div>${window.ICCHHome.playback(lang)}<p class="architecture-note">${t("remotePreview")}</p><p class="architecture-note">${t("productRelation")}</p></section></div>${window.PLCDetector.section(lang)}${cta()}`;
   if (route === "/technology")
     return `${pageHero("ICCH / TECHNOLOGY", "techTitle", "techIntro")}<section class="technology wrap"><div class="tech-grid">${C.techNames.map((x, i) => `<article class="tech reveal"><span class="number">0${i + 1}</span><h2>${pair(x)}</h2><p>${pair(C.techBodies[i])}</p><span class="tech-status">${t("direction")}</span></article>`).join("")}</div><p class="architecture-note">${t("techNote")}</p></section>${cta()}`;
   if (route === "/vision")
@@ -89,6 +92,78 @@ function page(route) {
   }
   return `<div class="page-hero wrap"><p class="eyebrow">404 / VIEWERA</p><h1>${t("notFound")}</h1><p class="bodycopy">${t("notFoundBody")}</p>${link("/", t("backHome"), true)}</div>`;
 }
+function productsNavigation(active) {
+  const items = [
+    [
+      "PLC Studio",
+      "/products#plc-studio",
+      ["On-site industrial HMI", "现场工业 HMI"],
+    ],
+    [
+      "ICCH Hub Desktop",
+      "/products#hub-desktop",
+      ["Cloud access on PC", "PC 端云控应用"],
+    ],
+    [
+      "ICCH Hub Mobile",
+      "/products#hub-mobile",
+      ["Cloud access on mobile", "移动端云控应用"],
+    ],
+    [
+      "PLC Detector",
+      "/products/plc-detector",
+      ["PLC discovery & communication", "PLC 发现与通信工具"],
+    ],
+  ];
+  return `<details class="products-nav"><summary ${active ? 'class="active" aria-current="page"' : ""}>${pair(C.nav[2])}</summary><div class="product-submenu"><div class="wrap"><div class="product-submenu-heading"><span>${lang === "zh" ? "探索产品" : "Explore products"}</span><a href="/products">${lang === "zh" ? "查看全部产品" : "All products"} ↗</a></div><div class="product-submenu-grid">${items.map(([name, url, description]) => `<a href="${url}"><strong>${name}</strong><small>${pair(description)}</small></a>`).join("")}</div></div></div></details>`;
+}
+function setupProductsNavigation() {
+  const menu = document.querySelector("header .products-nav");
+  const summary = document.querySelector("header .products-nav summary");
+  if (!menu) return;
+  menu.addEventListener("pointerenter", (e) => {
+    if (e.pointerType === "mouse" && window.innerWidth > 760) menu.open = true;
+  });
+  menu.addEventListener("pointerleave", (e) => {
+    if (e.pointerType === "mouse" && !menu.contains(document.activeElement))
+      menu.open = false;
+  });
+  menu.addEventListener("focusout", (e) => {
+    if (!menu.contains(e.relatedTarget)) menu.open = false;
+  });
+  menu.addEventListener("click", (e) => {
+    if (e.target.closest("a")) menu.open = false;
+    if (
+      e.target.closest("summary") &&
+      e.pointerType === "mouse" &&
+      window.innerWidth > 760
+    ) {
+      e.preventDefault();
+      menu.open = true;
+    }
+  });
+  menu.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      e.preventDefault();
+      e.stopPropagation();
+      menu.open = false;
+      summary.focus();
+    }
+    if (e.key === "ArrowDown" && e.target === summary) {
+      e.preventDefault();
+      menu.open = true;
+      document.querySelector("header .product-submenu a")?.focus();
+    }
+  });
+  document.getElementById("header").onpointerover = (e) => {
+    if (
+      e.pointerType === "mouse" &&
+      !menu.contains(e.target) &&
+      !menu.contains(document.activeElement)
+    )
+      menu.open = false;
+  };
+}
 function render() {
   window.ICCHHome.dispose();
   window.PLCStudio.resetRequest();
@@ -98,11 +173,21 @@ function render() {
   const links = C.nav
     .map(
       (x, i) =>
-        `<a href="${routes[i]}" ${route === routes[i] ? 'class="active" aria-current="page"' : ""}>${pair(x)}</a>`,
+        `<a href="${routes[i]}" ${route === routes[i] || (routes[i] === "/products" && route === "/products/plc-detector") ? 'class="active" aria-current="page"' : ""}>${pair(x)}</a>`,
+    )
+    .join("");
+  const headerLinks = C.nav
+    .map((x, i) =>
+      i === 2
+        ? productsNavigation(
+            route === "/products" || route === "/products/plc-detector",
+          )
+        : `<a href="${routes[i]}" ${route === routes[i] ? 'class="active" aria-current="page"' : ""}>${pair(x)}</a>`,
     )
     .join("");
   document.getElementById("header").innerHTML =
-    `<nav class="nav wrap" aria-label="${t("mainNav")}"><a class="brand" href="/" aria-label="ViewEra">${mark}<span>ViewEra</span></a><div class="navlinks ${menuOpen ? "open" : ""}" id="navigation">${links}</div><div class="nav-tools"><button class="language" data-language aria-label="${lang === "zh" ? "Switch to English" : "切换为中文"}"><span ${lang === "en" ? 'class="selected"' : ""}>EN</span><i>/</i><span ${lang === "zh" ? 'class="selected"' : ""}>中文</span></button><button class="menu-button ${menuOpen ? "open" : ""}" aria-label="${t("menu")}" aria-expanded="${menuOpen}" aria-controls="navigation"><i></i><i></i></button></div></nav>`;
+    `<nav class="nav wrap" aria-label="${t("mainNav")}"><a class="brand" href="/" aria-label="ViewEra">${mark}<span>ViewEra</span></a><div class="navlinks ${menuOpen ? "open" : ""}" id="navigation">${headerLinks}</div><div class="nav-tools"><button class="language" data-language aria-label="${lang === "zh" ? "Switch to English" : "切换为中文"}"><span ${lang === "en" ? 'class="selected"' : ""}>EN</span><i>/</i><span ${lang === "zh" ? 'class="selected"' : ""}>中文</span></button><button class="menu-button ${menuOpen ? "open" : ""}" aria-label="${t("menu")}" aria-expanded="${menuOpen}" aria-controls="navigation"><i></i><i></i></button></div></nav>`;
+  setupProductsNavigation();
   document.getElementById("main").innerHTML = page(route);
   document.getElementById("footer").innerHTML =
     `<div class="wrap"><div class="footer-main"><div><a class="brand" href="/">${mark}<span>ViewEra</span></a><p class="footer-manifesto">${t("footerLine")}</p></div><div class="footer-product"><span class="eyebrow">${t("footerProduct")}</span><span>${t("footerDesktop")}</span><p>${t("footerStatus")}</p></div><div class="footer-links">${links}</div></div><div class="footer-bottom"><span>${t("rights")}</span><button class="language" data-language>English / 简体中文</button></div></div>`;
@@ -110,17 +195,23 @@ function render() {
   document.querySelector(".close").setAttribute("aria-label", t("close"));
   document.getElementById("preview").setAttribute("aria-label", t("preview"));
   document.title =
-    index === 0
-      ? lang === "zh"
-        ? "ViewEra — ICCH · 让工业控制，突破边界"
-        : "ViewEra — ICCH · Control Beyond Boundaries"
-      : index > 0
-        ? pair(C.nav[index]) + " — ICCH · ViewEra"
-        : "404 — ViewEra";
+    route === "/products/plc-detector"
+      ? "PLC Detector — ICCH · ViewEra"
+      : index === 0
+        ? lang === "zh"
+          ? "ViewEra — ICCH · 让工业控制，突破边界"
+          : "ViewEra — ICCH · Control Beyond Boundaries"
+        : index > 0
+          ? pair(C.nav[index]) + " — ICCH · ViewEra"
+          : "404 — ViewEra";
+  const description =
+    route === "/products/plc-detector"
+      ? window.PLCDetector.description(lang)
+      : t("seoDesc");
   for (const [selector, value] of [
-    ['meta[name="description"]', t("seoDesc")],
+    ['meta[name="description"]', description],
     ['meta[property="og:title"]', document.title],
-    ['meta[property="og:description"]', t("seoDesc")],
+    ['meta[property="og:description"]', description],
     ['meta[property="og:url"]', config.origin + route],
     ['meta[property="og:locale"]', lang === "zh" ? "zh_CN" : "en_US"],
     ['link[rel="canonical"]', config.origin + route],
@@ -249,6 +340,7 @@ document.addEventListener("click", async (e) => {
   }
   const menu = target.closest(".menu-button");
   if (menu) {
+    document.querySelector("header .products-nav").open = false;
     menuOpen = !menuOpen;
     menu.classList.toggle("open", menuOpen);
     menu.setAttribute("aria-expanded", String(menuOpen));

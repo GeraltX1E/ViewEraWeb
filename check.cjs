@@ -23,7 +23,14 @@ function harness(
       setAttribute(k, v) {
         this.attributes[k] = v;
       },
-      addEventListener() {},
+      addEventListener(type, fn) {
+        (this.events ??= {})[type] = fn;
+      },
+      contains(target) {
+        return (
+          target === this || target === nodes["header .products-nav summary"]
+        );
+      },
       classList: { add() {}, remove() {}, toggle() {} },
       focus() {},
       showModal() {
@@ -50,7 +57,12 @@ function harness(
   };
   const media = { matches: reduce, addEventListener() {} };
   const ctx = {
-    window: { matchMedia: () => media, addEventListener() {}, scrollTo() {} },
+    window: {
+      innerWidth: 1280,
+      matchMedia: () => media,
+      addEventListener() {},
+      scrollTo() {},
+    },
     document: doc,
     location: { pathname: route },
     localStorage: {
@@ -80,6 +92,8 @@ function harness(
     "home-model.js",
     "home.js",
     "studio.js",
+    "detector-release.js",
+    "detector.js",
   ])
     vm.runInContext(fs.readFileSync("dist/" + file, "utf8"), ctx);
   ctx.window.SITE_CONFIG = { ...ctx.window.SITE_CONFIG, email };
@@ -111,6 +125,7 @@ for (const language of ["en", "zh"])
     "/vision",
     "/about",
     "/contact",
+    "/products/plc-detector",
   ])
     for (const reduce of [false, true]) {
       const h = harness(language, route, reduce);
@@ -138,13 +153,17 @@ for (const language of ["en", "zh"])
       if (route === "/about") assert(h.nodes.main.innerHTML.includes("985"));
       if (route === "/technology")
         assert(!/C\+\+|CMake|Qt Quick/.test(h.nodes.main.innerHTML));
-      assert(!h.nodes.main.innerHTML.includes("Coming Soon"));
+      if (route !== "/products/plc-detector")
+        assert(!h.nodes.main.innerHTML.includes("Coming Soon"));
       for (const m of (
         h.nodes.main.innerHTML +
         h.nodes.header.innerHTML +
         h.nodes.footer.innerHTML
       ).matchAll(/href="(\/[^"]*)"/g))
-        assert(fs.existsSync(path.join("dist", m[1], "index.html")), m[1]);
+        assert(
+          fs.existsSync(path.join("dist", m[1].split("#")[0], "index.html")),
+          m[1],
+        );
       if (route === "/contact")
         assert(h.nodes.main.innerHTML.includes("mailto:geraltxz@gmail.com"));
       if (route === "/") {
@@ -209,6 +228,26 @@ for (const language of ["en", "zh"])
       );
       count++;
     }
+const navigation = harness("en", "/contact");
+const productMenu = navigation.nodes["header .products-nav"];
+productMenu.events.pointerenter({ pointerType: "mouse" });
+assert.equal(productMenu.open, true);
+productMenu.events.pointerleave({ pointerType: "mouse" });
+assert.equal(productMenu.open, false);
+productMenu.events.pointerenter({ pointerType: "touch" });
+assert.equal(productMenu.open, false);
+productMenu.events.keydown({
+  key: "ArrowDown",
+  target: navigation.nodes["header .products-nav summary"],
+  preventDefault() {},
+});
+assert.equal(productMenu.open, true);
+productMenu.events.keydown({
+  key: "Escape",
+  preventDefault() {},
+  stopPropagation() {},
+});
+assert.equal(productMenu.open, false);
 const contact = harness("en", "/contact", false, "team@example.test");
 assert(contact.nodes.main.innerHTML.includes("mailto:team@example.test"));
 const unknown = harness("en", "/missing");
@@ -224,6 +263,7 @@ for (const route of [
   "vision",
   "about",
   "contact",
+  "products/plc-detector",
 ]) {
   const shell = fs.readFileSync(`dist/${route}/index.html`, "utf8");
   assert(
@@ -252,3 +292,4 @@ console.log(
 );
 require("./home-check.cjs");
 require("./studio-check.cjs");
+require("./detector-check.cjs");

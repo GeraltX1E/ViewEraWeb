@@ -1,0 +1,327 @@
+/* Product extension: shared type, spacing and mineral-green materials. */
+.detector-section {
+  scroll-margin-top: 85px;
+  background: #f3f6f1;
+  padding: 90px 0;
+}
+.detector-position {
+  font-size: 16px;
+  color: #75836e;
+  margin-top: 18px;
+}
+.detector-link {
+  display: inline-flex;
+  margin-top: 22px;
+  color: #4c6d58;
+}
+.detector-product-image {
+  display: block;
+  padding: 8px;
+  border: 1px solid #dce4d7;
+  background: #e7ede1;
+  border-radius: 22px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px #32442a12;
+}
+.detector-product-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 15px;
+}
+.detector-section .detector-product-image {
+  max-width: 960px;
+  margin: 45px auto 0;
+}
+.detector-section .concept-note {
+  text-align: center;
+  color: #84927c;
+}
+.detector-page {
+  background: #fafbfc;
+}
+.detector-page .button,
+.detector-section .button {
+  background: #405f4e;
+}
+.detector-page .button:hover {
+  background: #334f40;
+}
+.detector-page .page-hero {
+  padding-bottom: 65px;
+}
+.detector-back {
+  display: inline-block;
+  font-size: 12px;
+  margin-bottom: 45px;
+  color: #5f7766;
+}
+.detector-subtitle {
+  font-size: clamp(19px, 2.4vw, 27px);
+  color: #798773;
+  margin: 25px 0;
+  letter-spacing: -0.5px;
+}
+.detector-overview {
+  padding-bottom: 40px;
+}
+.detector-overview figure {
+  max-width: 980px;
+  margin: auto;
+}
+.detector-product-image figcaption {
+  padding: 15px 10px 9px;
+  text-align: center;
+  font-size: 11px;
+  color: #657d5d;
+}
+.detector-caption {
+  max-width: 840px;
+  margin: 24px auto;
+  font-size: 12px;
+  line-height: 1.9;
+  text-align: center;
+  color: #88977e;
+}
+.detector-relation {
+  max-width: 840px;
+  margin: 55px auto 0;
+}
+.detector-capabilities {
+  padding-top: 40px;
+  padding-bottom: 80px;
+}
+.detector-features {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  row-gap: 38px;
+}
+.detector-features article {
+  min-width: 0;
+}
+.detector-gallery {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-top: 55px;
+  align-items: start;
+}
+.detector-gallery details {
+  border: 1px solid #dfe6da;
+  border-radius: 16px;
+  background: #f3f6ef;
+  overflow: hidden;
+}
+.detector-gallery summary {
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  cursor: pointer;
+  font-size: 14px;
+  min-height: 64px;
+}
+.detector-gallery summary span {
+  color: #8ea181;
+  font-size: 23px;
+}
+.detector-gallery details[open] summary span {
+  transform: rotate(45deg);
+}
+.detector-gallery figure {
+  margin: 0;
+  padding: 0 12px 18px;
+}
+.detector-gallery img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  display: block;
+}
+.detector-gallery figcaption {
+  font-size: 11px;
+  line-height: 1.8;
+  color: #708266;
+  padding: 15px 8px 0;
+}
+.detector-download-section {
+  background: #eff3ea;
+  padding: 95px 0;
+  scroll-margin-top: 100px;
+}
+.detector-download-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  align-items: start;
+}
+.detector-download-card {
+  padding: 38px;
+  border: 1px solid #dce4d5;
+  border-radius: 22px;
+  background: #fafcf7;
+  min-width: 0;
+}
+.detector-download-heading {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  justify-content: space-between;
+}
+.detector-download-heading h3 {
+  font-size: 26px;
+  letter-spacing: -0.6px;
+  margin: 0;
+}
+.detector-status {
+  padding: 6px 10px;
+  border-radius: 20px;
+  color: #4e6d3c;
+  background: #e4edda;
+  font-size: 11px;
+  white-space: nowrap;
+}
+.detector-status.pending {
+  color: #818b76;
+  background: #e9ede3;
+}
+.detector-version {
+  margin-top: 25px;
+  font-size: 22px !important;
+  font-weight: 500;
+  color: #4a6540 !important;
+}
+.detector-version span {
+  color: #87987c;
+  font-size: 12px;
+  font-weight: 400;
+}
+.detector-download-card > p {
+  font-size: 13px;
+  line-height: 1.9;
+  color: #7b8a71;
+  margin: 20px 0;
+}
+.detector-download-card .button {
+  margin-top: 12px;
+  min-height: 48px;
+}
+.detector-download-card button:disabled {
+  background: #e2e8db;
+  color: #89957c;
+  cursor: default;
+  box-shadow: none;
+}
+.detector-review-note {
+  font-size: 11px !important;
+}
+.detector-requirements {
+  margin-top: 30px;
+  border-top: 1px solid #e2e8dc;
+  padding-top: 18px;
+}
+.detector-requirements summary {
+  font-size: 12px;
+  cursor: pointer;
+  min-height: 32px;
+}
+.detector-requirements p {
+  font-size: 11px;
+  line-height: 1.9;
+  color: #7e8d72;
+  margin: 15px 0;
+}
+.detector-requirements label {
+  display: block;
+  font-size: 10px;
+  color: #809174;
+}
+.detector-requirements code {
+  display: block;
+  margin-top: 8px;
+  font-size: 10px;
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+}
+.detector-file {
+  overflow-wrap: anywhere;
+}
+.detector-linux {
+  background: #f3f6ee;
+}
+.detector-page summary:focus-visible,
+.detector-page a:focus-visible,
+.detector-section a:focus-visible {
+  outline: 2px solid #5a7550;
+  outline-offset: 5px;
+}
+@media (max-width: 760px) {
+  .detector-section {
+    padding: 60px 0;
+  }
+  .detector-features {
+    grid-template-columns: 1fr;
+    row-gap: 15px;
+  }
+  .detector-gallery,
+  .detector-download-grid {
+    grid-template-columns: 1fr;
+  }
+  .detector-download-card {
+    padding: 25px;
+  }
+  .detector-download-heading h3 {
+    font-size: 24px;
+  }
+  .detector-download-section {
+    padding: 65px 0;
+  }
+  .detector-product-image {
+    padding: 4px;
+    border-radius: 14px;
+  }
+  .detector-product-image img {
+    border-radius: 10px;
+  }
+  .detector-product-image figcaption {
+    font-size: 10px;
+  }
+  .detector-page .page-hero {
+    padding-bottom: 40px;
+  }
+  .detector-caption {
+    font-size: 11px;
+  }
+  .detector-subtitle {
+    line-height: 1.5;
+  }
+  .detector-back {
+    margin-bottom: 30px;
+  }
+  .detector-page h1 {
+    font-size: clamp(38px, 9vw, 64px);
+    overflow-wrap: normal;
+  }
+  .detector-download-card .button {
+    width: 100%;
+    justify-content: center;
+    font-size: 12px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .detector-gallery details[open] summary span {
+    transform: none;
+  }
+}
+@media (prefers-contrast: more) {
+  .detector-page p,
+  .detector-page figcaption,
+  .detector-page code,
+  .detector-page label {
+    color: #3d5035 !important;
+  }
+  .detector-download-card,
+  .detector-gallery details {
+    border-color: #7a8b6e;
+  }
+}
