@@ -209,8 +209,8 @@ window.SITE_COPY = {
     "一个愿景，<br><span>正在成形。</span>",
   ],
   productsIntro: [
-    "ViewEra develops the ICCH ecosystem: PLC Studio at the production line, ICCH Hub Desktop and Mobile for access over the internet, and PLC Detector for discovery and communication checks.",
-    "ViewEra 围绕 ICCH 构建产品生态：产线现场的 PLC Studio、通过互联网访问现场的 ICCH Hub Desktop 与 Mobile，以及用于设备发现和通信验证的 PLC Detector。",
+    "ViewEra develops the ICCH ecosystem with PLC Studio at the production line, ICCH Hub Desktop and Mobile for access over the internet, and PLC Detector for device discovery, diagnostics and project monitoring.",
+    "ViewEra 围绕 ICCH 构建产品生态，包括产线现场的 PLC Studio、通过互联网访问现场的 ICCH Hub Desktop 与 Mobile，以及用于设备发现、诊断和项目监视的 PLC Detector。",
   ],
   icchTitle: ["A hub for connected experiences.", "让体验，相互连接。"],
   icchBody: [

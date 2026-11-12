@@ -21,15 +21,20 @@ assert.equal(R.productionUrl, publicUrl);
 assert.equal(R.publicationApproved, true);
 for (const language of ["en", "zh"]) {
   const html = P.render(language);
+  const summary = P.section(language);
   assert(html.includes("PLC Detector"));
-  assert(html.includes(language === "en" ? "FINS/TCP" : "FINS/TCP"));
-  assert(html.includes("FINS/UDP"));
+  assert(html.includes("0.7.0"));
+  assert(html.includes(language === "en" ? "Project monitoring" : "项目监视"));
+  assert(html.includes('class="detector-graphic" aria-hidden="true"'));
+  assert(html.includes('class="detector-sweep"'));
+  assert(summary.includes('href="/products/plc-detector"'));
+  assert(!/<(?:img|picture)\b/i.test(html + summary));
   assert(!html.includes("undefined"));
   assert(html.includes('href="' + publicUrl + '"'));
   assert(!html.includes('class="button detector-download" disabled'));
   assert(
     html.includes(
-      language === "en" ? "Linux — Coming Soon" : "Linux — 即将推出",
+      language === "en" ? "Coming Soon" : "即将推出",
     ),
   );
   assert(!/href="[^"]*linux/i.test(html));
@@ -45,7 +50,11 @@ for (const language of ["en", "zh"]) {
   const preview = P.render(language);
   assert(preview.includes('href="/__preview/downloads/' + R.file + '"'));
   assert(
-    preview.includes(language === "en" ? "Local review only" : "仅供本地审阅"),
+    preview.includes(
+      language === "en"
+        ? "a local copy of the public installer"
+        : "公开安装包的本机副本",
+    ),
   );
   ctx.window.PLC_DETECTOR_PREVIEW.sha256 = "stale";
   assert(P.render(language).includes('href="' + publicUrl + '"'));
@@ -59,11 +68,6 @@ for (const language of ["en", "zh"]) {
     P.render(language).includes('class="button detector-download" disabled'),
   );
   ctx.window.PLC_DETECTOR_RELEASE = R;
-  for (const image of html.matchAll(/src="(\/assets\/plc-detector\/[^"]+)"/g)) {
-    const data = fs.readFileSync(path.join(__dirname, "dist", image[1]));
-    assert.equal(data.subarray(1, 4).toString(), "PNG");
-    assert(data.readUInt32BE(16) > 0);
-  }
 }
 function files(dir) {
   return fs
@@ -88,5 +92,5 @@ assert(
     .includes("/products/plc-detector"),
 );
 console.log(
-  "Detector bilingual product, screenshots, metadata, local/public download separation and Linux Coming Soon checks passed.",
+  "Detector bilingual product, abstract illustration and download checks passed.",
 );

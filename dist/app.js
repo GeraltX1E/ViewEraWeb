@@ -220,6 +220,7 @@ function render() {
       .querySelector(selector)
       ?.setAttribute(selector.startsWith("link") ? "href" : "content", value);
   setupMotion();
+  window.PLCDetector.mountScan();
   window.ICCHHome.mount(lang);
 }
 function refreshDemo() {
