@@ -57,6 +57,7 @@ window.SITE_COPY = {
     ["About Us", "关于我们"],
     ["Contact", "联系"],
   ],
+  signIn: ["Sign in", "登录"],
   introducing: [
     "A VIEWERA HUB / INTRODUCING ICCH",
     "VIEWERA 核心中枢 / 探索 ICCH",

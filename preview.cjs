@@ -22,6 +22,9 @@ vm.runInNewContext(
 );
 const release = sandbox.window.PLC_DETECTOR_RELEASE;
 const endpoint = "/__preview/downloads/" + release.file;
+const accountPreviewConfigured = fs.existsSync(
+  path.join(__dirname, ".tools", "account-center-preview.json"),
+);
 let localDownload = null;
 const mapping = path.join(__dirname, ".tools", "detector-download.json");
 if (fs.existsSync(mapping)) {
@@ -61,6 +64,15 @@ const server = http.createServer((req, res) => {
     const pathname = decodeURIComponent(
       new URL(req.url, "http://localhost").pathname,
     );
+    if (pathname === "/config.js" && accountPreviewConfigured) {
+      const config = fs.readFileSync(path.join(root, "config.js"), "utf8");
+      res.writeHead(200, { "Content-Type": types[".js"] }).end(
+        req.method === "HEAD"
+          ? ""
+          : config + '\nwindow.SITE_CONFIG = Object.freeze({ ...window.SITE_CONFIG, accountCenterUrl: "http://127.0.0.1:4174/" });',
+      );
+      return;
+    }
     if (pathname === "/__preview/detector-config.js") {
       const value = localDownload
         ? { url: endpoint, version: release.version, sha256: release.sha256 }
@@ -128,6 +140,8 @@ const server = http.createServer((req, res) => {
 });
 server.listen(port, "127.0.0.1", () => {
   console.log(`Local: http://127.0.0.1:${port}`);
+  if (accountPreviewConfigured)
+    console.log("Sign in uses the separate account-center preview on port 4174.");
   console.log(
     localDownload
       ? `Local review download ready: ${release.file} (${release.bytes} bytes)`

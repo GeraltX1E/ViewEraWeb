@@ -7,4 +7,5 @@ window.SITE_CONFIG = Object.freeze({
   desktop: "PLC Studio",
   origin: "https://viewera.site",
   previewImage: "",
+  accountCenterUrl: "",
 });

@@ -9,6 +9,7 @@ function harness(
   route,
   reduce = false,
   email = "geraltxz@gmail.com",
+  accountCenterUrl,
 ) {
   const nodes = {},
     events = {},
@@ -97,6 +98,8 @@ function harness(
   ])
     vm.runInContext(fs.readFileSync("dist/" + file, "utf8"), ctx);
   ctx.window.SITE_CONFIG = { ...ctx.window.SITE_CONFIG, email };
+  if (accountCenterUrl !== undefined)
+    ctx.window.SITE_CONFIG.accountCenterUrl = accountCenterUrl;
   vm.runInContext(fs.readFileSync("dist/app.js", "utf8"), ctx);
   return {
     ctx,
@@ -132,6 +135,7 @@ for (const language of ["en", "zh"])
       assert(h.nodes.main.innerHTML.includes("<h1"));
       assert(!h.nodes.main.innerHTML.includes("undefined"));
       assert(h.nodes.header.innerHTML.includes("ViewEra"));
+      assert(!h.nodes.header.innerHTML.includes("nav-sign-in"));
       assert(h.ctx.document.title.includes("ViewEra"));
       assert.equal(
         h.ctx.document.documentElement.lang,
@@ -228,6 +232,18 @@ for (const language of ["en", "zh"])
       );
       count++;
     }
+const previewAccountUrl = "http://127.0.0.1:4174/";
+const preview = harness(
+  "en",
+  "/products/plc-detector",
+  false,
+  undefined,
+  previewAccountUrl,
+);
+assert(preview.nodes.header.innerHTML.includes(`href="${previewAccountUrl}">Sign in</a>`));
+preview.click("[data-language]");
+assert(preview.nodes.header.innerHTML.includes(`href="${previewAccountUrl}">登录</a>`));
+
 const navigation = harness("en", "/contact");
 const productMenu = navigation.nodes["header .products-nav"];
 productMenu.events.pointerenter({ pointerType: "mouse" });

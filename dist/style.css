@@ -130,6 +130,25 @@ header {
   align-items: center;
   gap: 15px;
 }
+.nav-sign-in {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding-inline: 14px;
+  border-radius: 999px;
+  background: #e8f0eb;
+  color: #245744;
+  font-size: 12px;
+  font-weight: 650;
+  white-space: nowrap;
+}
+.nav-sign-in:hover {
+  background: #dceae2;
+}
+.nav-sign-in:active {
+  background: #cfdfd5;
+}
 .language {
   border: 0;
   background: transparent;
@@ -1412,6 +1431,37 @@ html[lang="zh-CN"] .eyebrow {
   }
   .demo-metrics strong {
     font-size: 28px;
+  }
+}
+@media (min-width: 761px) and (max-width: 900px) {
+  .nav:has(.nav-sign-in),
+  .nav:has(.nav-sign-in) .navlinks {
+    gap: 14px;
+  }
+}
+@media (max-width: 420px) {
+  .nav:has(.nav-sign-in) {
+    padding-inline: 14px;
+    gap: 8px;
+  }
+  .nav:has(.nav-sign-in) .brand {
+    font-size: 20px;
+  }
+  .nav:has(.nav-sign-in) .brand svg {
+    width: 24px;
+    height: 24px;
+  }
+  .nav-tools:has(.nav-sign-in) {
+    gap: 4px;
+  }
+  .nav-tools:has(.nav-sign-in) .language {
+    padding-inline: 4px;
+  }
+  .nav-tools:has(.nav-sign-in) .language i {
+    margin-inline: 4px;
+  }
+  .nav-sign-in {
+    padding-inline: 9px;
   }
 }
 @media (max-width: 760px) {

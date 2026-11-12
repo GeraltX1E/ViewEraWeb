@@ -185,8 +185,11 @@ function render() {
         : `<a href="${routes[i]}" ${route === routes[i] ? 'class="active" aria-current="page"' : ""}>${pair(x)}</a>`,
     )
     .join("");
+  const signIn = config.accountCenterUrl
+    ? `<a class="nav-sign-in" href="${esc(config.accountCenterUrl)}">${t("signIn")}</a>`
+    : "";
   document.getElementById("header").innerHTML =
-    `<nav class="nav wrap" aria-label="${t("mainNav")}"><a class="brand" href="/" aria-label="ViewEra">${mark}<span>ViewEra</span></a><div class="navlinks ${menuOpen ? "open" : ""}" id="navigation">${headerLinks}</div><div class="nav-tools"><button class="language" data-language aria-label="${lang === "zh" ? "Switch to English" : "切换为中文"}"><span ${lang === "en" ? 'class="selected"' : ""}>EN</span><i>/</i><span ${lang === "zh" ? 'class="selected"' : ""}>中文</span></button><button class="menu-button ${menuOpen ? "open" : ""}" aria-label="${t("menu")}" aria-expanded="${menuOpen}" aria-controls="navigation"><i></i><i></i></button></div></nav>`;
+    `<nav class="nav wrap" aria-label="${t("mainNav")}"><a class="brand" href="/" aria-label="ViewEra">${mark}<span>ViewEra</span></a><div class="navlinks ${menuOpen ? "open" : ""}" id="navigation">${headerLinks}</div><div class="nav-tools"><button class="language" data-language aria-label="${lang === "zh" ? "Switch to English" : "切换为中文"}"><span ${lang === "en" ? 'class="selected"' : ""}>EN</span><i>/</i><span ${lang === "zh" ? 'class="selected"' : ""}>中文</span></button>${signIn}<button class="menu-button ${menuOpen ? "open" : ""}" aria-label="${t("menu")}" aria-expanded="${menuOpen}" aria-controls="navigation"><i></i><i></i></button></div></nav>`;
   setupProductsNavigation();
   document.getElementById("main").innerHTML = page(route);
   document.getElementById("footer").innerHTML =
