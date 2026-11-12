@@ -135,7 +135,14 @@ for (const language of ["en", "zh"])
       assert(h.nodes.main.innerHTML.includes("<h1"));
       assert(!h.nodes.main.innerHTML.includes("undefined"));
       assert(h.nodes.header.innerHTML.includes("ViewEra"));
-      assert(!h.nodes.header.innerHTML.includes("nav-sign-in"));
+      const accountUrl = new URL(h.ctx.window.SITE_CONFIG.accountCenterUrl);
+      assert.equal(accountUrl.protocol, "https:");
+      const signInLabel = language === "zh" ? "登录" : "Sign in";
+      assert(
+        h.nodes.header.innerHTML.includes(
+          `class="nav-sign-in" href="${accountUrl.href}">${signInLabel}</a>`,
+        ),
+      );
       assert(h.ctx.document.title.includes("ViewEra"));
       assert.equal(
         h.ctx.document.documentElement.lang,
